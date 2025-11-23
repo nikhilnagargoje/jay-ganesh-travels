@@ -1,0 +1,52 @@
+.find-bubble {
+  position: fixed;
+  right: 25px;
+  bottom: 95px; /* call button (bottom:25px) च्या वर perfect spacing */
+  z-index: 1200;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #ffea66, #ffd300);
+  color: #000;
+  padding: 10px 14px;
+  border-radius: 999px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  transition: transform .18s ease, box-shadow .18s ease;
+  min-width: 140px;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(0,0,0,0.08);
+  cursor: pointer;
+}
+
+.find-bubble:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.28);
+}
+
+.fb-inner {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.fb-icon {
+  font-size: 20px;
+}
+
+.fb-text {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+/* Mobile */
+@media (max-width: 520px) {
+  .find-bubble {
+    right: 14px;
+    bottom: 85px; /* mobile call button च्या वर perfect */
+    min-width: 120px;
+    padding: 10px 12px;
+  }
+  .fb-text { font-size: 14px; }
+  .fb-icon { font-size: 18px; }
+}

@@ -1,0 +1,236 @@
+:root {
+  --primary: #ffdd00;
+}
+
+/* NAVBAR BASE */
+.navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: 15px 40px;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 999;
+  box-sizing: border-box;
+}
+
+/* LOGO + BRAND */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-logo {
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.brand {
+  color: var(--primary);
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* NAV LINKS */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+/* BASIC LINKS → Home, Packages, Vehicles */
+.basic-link {
+  color: #fff !important;
+  font-size: 17px;
+  font-weight: 400;
+  background: none;
+  padding: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.basic-link:hover {
+  color: var(--primary) !important;
+}
+
+/* DROPDOWN */
+.dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+.drop-btn {
+  color: #fff;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* arrow */
+.arrow {
+  font-size: 12px;
+  transition: 0.3s;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+/* DROPDOWN BOX */
+.dropdown-content {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 35px;
+  right: 0;
+  width: 180px;
+  background: #111;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 12px #00000050;
+  z-index: 1000;
+}
+
+.dropdown-content a,
+.dropdown-content .drop-link {
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+  font-size: 15px;
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.dropdown-content a:hover,
+.dropdown-content .drop-link:hover {
+  background: var(--primary);
+  color: #000;
+}
+
+/* show dropdown (JS toggles .drop-show on the dropdown-content element) */
+.drop-show {
+  display: flex;
+}
+
+/* HAMBURGER */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.bar {
+  width: 28px;
+  height: 3px;
+  background: var(--primary);
+  transition: .3s;
+}
+
+.bar1-open { transform: rotate(45deg) translate(7px, 6px); }
+.bar2-open { opacity: 0; }
+.bar3-open { transform: rotate(-45deg) translate(7px, -6px); }
+
+/* MOBILE */
+@media (max-width: 992px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-links {
+    position: fixed;
+    left: 0;
+    top: 60px;
+    width: 100%;
+    height: calc(100vh - 60px);
+    background: rgba(0,0,0,0.95);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 25px 20px;
+    transform: translateX(-100%);
+    transition: .4s;
+    box-sizing: border-box;
+  }
+
+  .nav-show {
+    transform: translateX(0);
+  }
+
+  .basic-link,
+  .drop-btn {
+    width: 100%;
+    font-size: 16px;
+    text-align: left;
+  }
+
+  .dropdown-content {
+    position: static;
+    width: 100%;
+    background: transparent;
+    box-shadow: none;
+    padding-left: 20px;
+  }
+
+  .dropdown-content a,
+  .dropdown-content .drop-link {
+    background: none;
+    color: #ddd;
+  }
+
+  .dropdown-content a:hover,
+  .dropdown-content .drop-link:hover {
+    background: rgba(255,221,0,0.2);
+    color: var(--primary);
+  }
+
+  .animated-brand {
+    background: linear-gradient(90deg, #ffdd00, #ff8c00, #ffe600);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    font-weight: 800;
+    animation: brandGlow 4s linear infinite;
+  }
+}
+
+/* keyframes can be outside media queries */
+@keyframes brandGlow {
+  0% { background-position: 0%; }
+  50% { background-position: 100%; }
+  100% { background-position: 0%; }
+}
+
+/* FIX: mobile मध्ये navbar खाली content लपतो */
+@media (max-width: 992px) {
+  body {
+    padding-top: 80px; /* exact navbar height */
+  }
+}
+
+.nav-links a,
+.nav-links button,
+.drop-btn {
+  touch-action: manipulation !important;
+}
+
+.nav-links a,
+.nav-links button,
+.drop-btn {
+  touch-action: manipulation !important;
+}
