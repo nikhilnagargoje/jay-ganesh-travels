@@ -92,7 +92,7 @@ function VehicleDetails() {
       <p>{vehicle.desc}</p>
 
       {/* DIRECT CALL BUTTON */}
-      <a className="btn-main" href="tel:+919876543210">
+      <a className="btn-main" href="tel:+917721823575">
         📞 Book Now
       </a>
     </div>
