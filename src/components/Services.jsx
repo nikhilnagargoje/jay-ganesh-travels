@@ -16,8 +16,8 @@ function Services() {
         </div>
 
         <div className="service-card">
-          <h3>Package Service</h3>
-          <p>Package Services are available on various routes</p>
+          <h3>Parcel Service</h3>
+          <p>Parcel Services are available</p>
         </div>
 
         <div className="service-card">
