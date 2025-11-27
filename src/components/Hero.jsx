@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 function Hero() {
 
   const handleBookNow = () => {
-    window.location.href = "tel:+91";  // ← Direct Call
+    window.location.href = "tel:+917721823575";  // ← Direct Call
   };
 
   return (
