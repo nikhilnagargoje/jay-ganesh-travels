@@ -1,22 +1,14 @@
 import nodemailer from "nodemailer";
 
 export default async function handler(req, res) {
-  // 🔥 CORS FIX
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
-  }
-
   if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method Not Allowed" });
+    res.status(405).json({ success: false, msg: "Method Not Allowed" });
+    return;
   }
-
-  const { name, mobile, email, fromCity, toCity, vehicle, message } = req.body;
 
   try {
+    const { name, mobile, email, fromCity, toCity, vehicle, message } = req.body;
+
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 465,
@@ -30,22 +22,26 @@ export default async function handler(req, res) {
     await transporter.sendMail({
       from: "jayganeshtravels0@gmail.com",
       to: "jayganeshtravels0@gmail.com",
-      subject: `New Inquiry From ${name}`,
+      subject: `New Inquiry from ${name}`,
       html: `
-        <h3>Name:</h3> ${name}
-        <h3>Mobile:</h3> ${mobile}
-        <h3>Email:</h3> ${email}
-        <h3>From:</h3> ${fromCity}
-        <h3>To:</h3> ${toCity}
-        <h3>Vehicle:</h3> ${vehicle}
-        <h3>Message:</h3> ${message}
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Mobile:</strong> ${mobile}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>From:</strong> ${fromCity}</p>
+        <p><strong>To:</strong> ${toCity}</p>
+        <p><strong>Vehicle:</strong> ${vehicle}</p>
+        <p><strong>Message:</strong> ${message}</p>
       `,
     });
 
-    res.status(200).json({ success: true, msg: "Message Sent Successfully!" });
+    res.status(200).json({ success: true, msg: "Message delivered successfully!" });
 
-  } catch (err) {
-    res.status(500).json({ success: false, msg: err.message });
+  } catch (error) {
+    console.error("Email error:", error);
+    res.status(500).json({ success: false, msg: "A server error occurred" });
+  }
+}
+
   }
 }
 
