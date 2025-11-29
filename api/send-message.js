@@ -2,12 +2,15 @@ import nodemailer from "nodemailer";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
-    res.status(405).json({ success: false, msg: "Method Not Allowed" });
-    return;
+    return res.status(405).json({ success: false, msg: "Method Not Allowed" });
   }
 
   try {
     const { name, mobile, email, fromCity, toCity, vehicle, message } = req.body;
+
+    if (!name || !mobile || !vehicle) {
+      return res.status(400).json({ success: false, msg: "Missing required fields" });
+    }
 
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
@@ -24,25 +27,25 @@ export default async function handler(req, res) {
       to: "jayganeshtravels0@gmail.com",
       subject: `New Inquiry from ${name}`,
       html: `
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Mobile:</strong> ${mobile}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>From:</strong> ${fromCity}</p>
-        <p><strong>To:</strong> ${toCity}</p>
-        <p><strong>Vehicle:</strong> ${vehicle}</p>
-        <p><strong>Message:</strong> ${message}</p>
+        <h2>New Travel Inquiry</h2>
+        <p><b>Name:</b> ${name}</p>
+        <p><b>Mobile:</b> ${mobile}</p>
+        <p><b>Email:</b> ${email}</p>
+        <p><b>From City:</b> ${fromCity}</p>
+        <p><b>To City:</b> ${toCity}</p>
+        <p><b>Vehicle:</b> ${vehicle}</p>
+        <p><b>Message:</b> ${message}</p>
       `,
     });
 
-    res.status(200).json({ success: true, msg: "Message delivered successfully!" });
+    return res.status(200).json({ success: true, msg: "Message delivered successfully!" });
 
   } catch (error) {
-    console.error("Email error:", error);
-    res.status(500).json({ success: false, msg: "A server error occurred" });
+    console.error("EMAIL ERROR:", error);
+    return res.status(500).json({
+      success: false,
+      msg: "Email sending failed",
+      error: error.message,
+    });
   }
-}
-
-  }
-}
-
 }
