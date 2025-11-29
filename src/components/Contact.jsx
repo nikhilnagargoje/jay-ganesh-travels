@@ -36,7 +36,7 @@ export default function Contact() {
     setSending(true);
 
     try {
-      const res = await fetch("https://jay-ganesh-travels-ajotutrlw-nikhi-nagargojes-projects.vercel.app/api/send-message", {
+      const res = await fetch("/api/send-message", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form)
