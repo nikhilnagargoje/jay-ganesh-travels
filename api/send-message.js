@@ -1,6 +1,15 @@
 import nodemailer from "nodemailer";
 
 export default async function handler(req, res) {
+  // 🔥 CORS FIX
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method Not Allowed" });
   }
@@ -33,8 +42,11 @@ export default async function handler(req, res) {
       `,
     });
 
-    res.status(200).json({ success: true, msg: "Email Sent Successfully!" });
+    res.status(200).json({ success: true, msg: "Message Sent Successfully!" });
+
   } catch (err) {
     res.status(500).json({ success: false, msg: err.message });
   }
+}
+
 }
